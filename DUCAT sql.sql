@@ -47,3 +47,69 @@ INSERT INTO department(Did,Dname,Dlocation) values
 
 /* 03/07/2025 (Thursday) */
 
+-- to delete the table we use DROP TABLE and we can drop the database also by DROP DATABASE
+DROP TABLE Department;
+
+-- Create table to link other table you can say there are two type of table parent table and child table here we are linking Department to 
+-- employee meaning we will be useing departmnet column in employee table 
+CREATE TABLE Department (
+ D_id INT PRIMARY KEY, 
+ D_name VARCHAR(25) UNIQUE
+ );
+
+-- CREATE TABLE IF NOT EXISTS is a good practice to use it is used to check if that table exist if not make it 
+-- FLOAT allows decimal numbers, CONSTRAINT keyword in SQL is used to set rules on columns in a table (this is not that important)  
+-- FOREIGN KEY creates a relationship It links D_id in the employee table to D_id in the Department table.
+-- REFERENCES is like telling that this column is telling about this columns.
+CREATE TABLE IF NOT EXISTS employee(
+e_id INT PRIMARY KEY,
+e_name VARCHAR(40),
+salary FLOAT,
+D_id INT,
+CONSTRAINT FOREIGN KEY(D_id) REFERENCES Department (D_id)
+);
+
+-- INSERT data in department 
+INSERT INTO department (D_id,D_name) VALUES
+(101,"HR"),
+(102, "Admin"),
+(103, "Devloper");
+
+-- INSERT data in employee
+INSERT INTO employee(e_id,e_name,salary,D_id) VALUES
+(1001, "Mayank","45000","101");
+
+-- CHECK is like to put some condition before INSERT data will CREATEing table 
+CREATE TABLE emp(
+e_id INT PRIMARY KEY,
+E_name VARCHAR(30),
+age INT CHECK(Age>=18),
+address VARCHAR(50)
+);
+
+-- INSERT data in emp
+INSERT INTO emp(e_id,Age) VALUES
+(1, 20);
+
+-- to see the table 
+SELECT * FROM emp;
+
+-- INSERT data but it will not take it because age is not 18+ will creating table we used check to see age must be +18
+INSERT INTO emp(e_id,Age) VALUE
+(1, 15); 
+
+-- DEFAULT is like haveing default value if you not put anything  
+CREATE TABLE emp1(
+e_id INT PRIMARY KEY,
+E_name VARCHAR(30) DEFAULT("New Joiner"),
+age INT CHECK(Age>=18),
+address VARCHAR(50)
+);
+
+-- INSERT data in emp1
+INSERT INTO emp1(e_id,Age) VALUES
+(1, 20); 
+
+-- see the table but you can see E_name New Joiner because will creating table we put default value in emp1 
+SELECT * FROM emp1;
+
