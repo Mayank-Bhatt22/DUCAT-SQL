@@ -2,7 +2,7 @@
 
 /* all ways end the command with ; it is like a full stop for sql you can write like this to explain your command to other coder and you
 can click ctrl+b to make it look more beautiful */
-
+/* ctrl+enter to run the code*/
 /* firstly we are going to create a database to store all table */
 CREATE DATABASE Homerevison;
 
