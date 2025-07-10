@@ -113,7 +113,7 @@ INSERT INTO emp1(e_id,Age) VALUES
 -- see the table but you can see E_name New Joiner because will creating table we put default value in emp1 
 SELECT * FROM emp1;
 
--- 9/6/2025
+-- 9/7/2025
 
 DROP DATABASE Company;
 
