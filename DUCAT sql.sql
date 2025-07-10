@@ -113,3 +113,48 @@ INSERT INTO emp1(e_id,Age) VALUES
 -- see the table but you can see E_name New Joiner because will creating table we put default value in emp1 
 SELECT * FROM emp1;
 
+-- 9/6/2025
+
+DROP DATABASE Company;
+
+CREATE DATABASE company;
+
+USE company;
+
+CREATE TABLE Branch(
+Branch_id INT PRIMARY KEY,
+B_name VARCHAR(20),
+Location VARCHAR(50)
+);
+
+DESC Branch;
+
+CREATE TABLE Department(
+Dep_id INT PRIMARY KEY,
+Dep_name VARCHAR(20),
+Branch_id INT,
+CONSTRAINT FOREIGN KEY(Branch_id) REFERENCES Branch(Branch_id)
+);
+
+CREATE TABLE employee(
+e_id INT PRIMARY KEY,
+e_name VARCHAR(40),
+salary FLOAT,
+D_id INT,
+CONSTRAINT FOREIGN KEY(D_id) REFERENCES Department (Dep_id)
+);
+
+CREATE TABLE Product(
+P_id INT PRIMARY KEY,
+P_name VARCHAR(30)
+);
+
+
+-- we created this table so we can make a relation between many to many 
+CREATE TABLE Product_emp_Branch(
+id INT PRIMARY KEY,
+Branch_id INT,
+e_id INT,
+CONSTRAINT FOREIGN KEY(Branch_id) REFERENCES Branch(Branch_id),
+CONSTRAINT FOREIGN KEY(e_id) REFERENCES employee(e_id)
+);
