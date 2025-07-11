@@ -1,58 +1,57 @@
-/* 01/07/2025 (Tusesday)*/
+-- 01/07/2025 (Tusesday)
 
-/* all ways end the command with ; it is like a full stop for sql you can write like this to explain your command to other coder and you
-can click ctrl+b to make it look more beautiful */
-/* ctrl+enter to run the code*/
-/* firstly we are going to create a database to store all table */
+-- All ways end the command with ; it is like a full stop for sql you can write like this to explain your command to other coder by adding this (--) before the line 
+-- You can select the code and then click ctrl+b to make it look more beautiful or you can say more organise and by select the code and clicking on ctrl+enter to run the code
+
+-- Firstly we are going to create a database to store all table 
 CREATE DATABASE Homerevison;
 
-/* So we have created the database we are telling computer to use it */
+-- So we have created the database we are telling computer to use it 
 USE Homerevison;
 
-/*now we are going to make table for the database to store data INT means number, VARCHAR mean to write some word, CHAR means also are 
-words and NOT NULL mean that you can not leave this place empty */
-CREATE TABLE student
-(
+-- Now we are going to make table for the database to store data INT means number, VARCHAR mean to write some word, CHAR means also are for words and
+-- NOT NULL mean that you can not leave this place empty 
+CREATE TABLE student(
 id INT NOT NULL,
 name VARCHAR(30),
 gender CHAR(10)
 );
 
-/* DESC is used to describe the table use to see table */
+-- DESC is used to describe the table use to see table 
 DESC student;
 
-/* to INSERT the data in the table */
+-- To INSERT the data in the table 
 INSERT INTO student(id,name,gender) values
 (1,"Mayank Bhatt","Male"),
 (2, "Dexant Bhatt", "Male"),
 (3, "Sonali Bhatt", "Female");
 
-/* to see table * mean all */
+-- To see table (*) mean all 
 SELECT * FROM student;
 
-/* 02/07/2025 (Wednesday) */
+-- 02/07/2025 (Wednesday) 
 
-/* UNIQUE mean only one, PRIMARY KEY mean it is like a mix of UNIQUE and NOT NULL */
+-- UNIQUE mean only one, PRIMARY KEY mean it is like a mix of UNIQUE and NOT NULL 
 CREATE TABLE department (
 Did INT PRIMARY KEY,
 Dname VARCHAR(30) UNIQUE,
 Dlocation VARCHAR(30) NOT NULL
 );
 
-/* to INSERT the data in the table */
+-- To INSERT the data in the table 
 INSERT INTO department(Did,Dname,Dlocation) values
 (1, "Mayank Bhatt", "Delhi"),
 (2, "Dexant Bhatt","Delhi"),
 (3, "Sonali Bhatt", "UP");
 
-/* 03/07/2025 (Thursday) */
+-- 03/07/2025 (Thursday) 
 
--- to delete the table we use DROP TABLE and we can drop the database also by DROP DATABASE
+-- To delete the table we use DROP TABLE and we can drop the database also by DROP DATABASE
 DROP TABLE Department;
 
--- Create table to link other table you can say there are two type of table parent table and child table here we are linking Department to 
--- employee meaning we will be useing departmnet column in employee table 
-CREATE TABLE Department (
+-- Create table to link other table you can say there are two type of table parent table and child table here we are linking Department to employee meaning 
+-- we will be useing departmnet column in employee table 
+CREATE TABLE Department(
  D_id INT PRIMARY KEY, 
  D_name VARCHAR(25) UNIQUE
  );
@@ -113,8 +112,9 @@ INSERT INTO emp1(e_id,Age) VALUES
 -- see the table but you can see E_name New Joiner because will creating table we put default value in emp1 
 SELECT * FROM emp1;
 
--- 9/7/2025
+-- 9/7/2025 (Monday)
 
+-- reviseing 
 DROP DATABASE Company;
 
 CREATE DATABASE company;
@@ -159,7 +159,8 @@ CONSTRAINT FOREIGN KEY(Branch_id) REFERENCES Branch(Branch_id),
 CONSTRAINT FOREIGN KEY(e_id) REFERENCES employee(e_id)
 );
 
--- 10/7/2025
+-- 10/7/2025 (Wednesday)
+
 -- Revison of inserting data 
 INSERT INTO Branch VALUES
 (01,"Management Branch","Delhi"),
@@ -207,3 +208,42 @@ SELECT * FROM product;
 ('2022-04-06',5,1003);
 SELECT * FROM Product_emp;
 
+-- 11/7/2025 (Friday)
+
+-- Useing database that you prefer
+USE College;
+
+-- Createing wrong table to learning who to rewrite it without droping it
+CREATE TABLE Parson(
+Id INT,
+NAME CHAR(10),
+Address VARCHAR(50)
+);
+
+-- This is who to add one rows in the table
+ALTER TABLE Parson ADD Contact INT UNIQUE;
+
+-- This is who to add multiple rows in the table
+ALTER TABLE Parson ADD (Gender CHAR(6),Email VARCHAR(50), Age INT CHECK(age>=18));
+
+-- To see if every thing is good
+SELECT * FROM Parson;
+
+-- Inserting data
+INSERT INTO parson VALUES 
+(01,"Mayank","abcd",4667775,"Male","asf@gmail.com",35),
+(02,"Dexant","efgh",9455445,"Woman","acf@gmail.com",34),
+(03,"Satyam","ijkl",9344245,"Transwoman","vsf@gmail.com",65);
+
+-- To drop a row of a table without droping the whole table
+ALTER TABLE Parson DROP COLUMN Gender;
+
+-- To modify meaning to rewrite the charteristic of row header which we did wrong above
+ALTER TABLE Parson MODIFY Contact BIGINT;
+ALTER TABLE Mayank MODIFY Name VARCHAR(30);
+
+-- To renameing the database 
+ALTER TABLE Parson RENAME Mayank;
+
+-- To see every thing is good 
+SELECT * FROM Mayank;
