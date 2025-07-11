@@ -158,3 +158,52 @@ e_id INT,
 CONSTRAINT FOREIGN KEY(Branch_id) REFERENCES Branch(Branch_id),
 CONSTRAINT FOREIGN KEY(e_id) REFERENCES employee(e_id)
 );
+
+-- 10/7/2025
+-- Revison of inserting data 
+INSERT INTO Branch VALUES
+(01,"Management Branch","Delhi"),
+(02, "Head", "Delhi"),
+(03, "Mumbai","uk"),
+(04, "Mayank", "UP"),
+(05, "Bhatt", "Patna");
+
+SELECT * FROM Branch;
+
+INSERT INTO Department VALUES 
+(101,"HR",01),
+(102,"MB",02),
+(103,"DA",03),
+(104,"DS",01),
+(105,"ba",02),
+(106,"VLB",04),
+(107,"SB",05),
+(108,"PB",04),
+(109,"DB",02),
+(110,"DB",04);
+SELECT * FROM Department;
+
+Insert INTO employee VALUES
+(1001,"Mayank",28000,103),
+(1002,"Satyam",25000,106),
+(1003,"Dexant",30000,108),
+(1004,"Gopal", 20000,102),
+(1005,"Uday", 32000,101);
+SELECT * FROM employee;
+
+Insert INTO product VALUES
+(1,"asd",02),
+(2,"ZXC",01),
+(3,"QWE",03),
+(4,"POI",05),
+(5,"LKJ",04);
+SELECT * FROM product;
+
+ Insert INTO Product_emp VALUES
+('2022-04-02',1,1001),
+('2022-04-03',4,1004),
+('2022-04-04',3,1002),
+('2022-04-05',2,1005),
+('2022-04-06',5,1003);
+SELECT * FROM Product_emp;
+
