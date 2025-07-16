@@ -269,6 +269,37 @@ ALTER TABLE course MODIFY credits INT UNIQUE;
 ALTER TABLE course MODIFY Bhatt VARCHAR(45) DEFAULT "Bhatt";
 ALTER TABLE COURSE ADD CONSTRAINT title CHECK (title IN ("Delhi","Mayank"));
 
+
+-- 16/7/2025
+
+-- Useing the database
+USE mayank;
+
+-- makeing table to add foregin key in it by alter
+CREATE TABLE customer(
+c_id INT PRIMARY KEY,
+name VARCHAR(50),
+address TEXT,
+contact BIGINT
+);
+
+CREATE TABLE orders(
+o_id INT PRIMARY KEY,
+o_date DATE,
+item VARCHAR(50),
+c_id INT
+);
+
+-- adding the foregin key after the table was already created
+ALTER TABLE orders ADD CONSTRAINT cust_order1 FOREIGN KEY(c_id) REFERENCES customer(c_id);
+
+-- droping foreign key but 
+ALTER TABLE orders DROP FOREIGN KEY cust_order1;
+
+-- Inserting the data to see everthing ok
+INSERT INTO orders VALUES(01, "2025-07-16","adc",123);
+SELECT * FROM orders;
+
 -- to see if  all thing work good  
 SELECT * FROM course;
 DESC course;
