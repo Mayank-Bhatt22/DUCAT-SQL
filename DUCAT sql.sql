@@ -247,3 +247,30 @@ ALTER TABLE Parson RENAME Mayank;
 
 -- To see every thing is good 
 SELECT * FROM Mayank;
+
+
+-- 15/7/2025
+
+-- useing the database we changed name of the database 
+USE mayank;
+
+-- To renameing the column name of the table
+ALTER TABLE course RENAME COLUMN course_id TO BHATT; 
+
+-- To remove all the data of the table without droping the table
+TRUNCATE TABLE course;
+
+-- Add Constraint primary key in the column 
+ ALTER TABLE course ADD UNIQUE (TITLE);
+
+-- how can we change Constraint and charteristic in one line
+ALTER TABLE course MODIFY title VARCHAR(45) NOT NULL;
+ALTER TABLE course MODIFY credits INT UNIQUE;
+ALTER TABLE course MODIFY Bhatt VARCHAR(45) DEFAULT "Bhatt";
+ALTER TABLE COURSE ADD CONSTRAINT title CHECK (title IN ("Delhi","Mayank"));
+
+-- to see if  all thing work good  
+SELECT * FROM course;
+DESC course;
+INSERT INTO course (Bhatt,title,credits)VALUES
+("so","BHATT",2);
