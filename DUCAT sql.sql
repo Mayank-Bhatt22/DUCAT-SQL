@@ -1,8 +1,8 @@
+
 -- 01/07/2025 (Tusesday)
 
 -- All ways end the command with ; it is like a full stop for sql you can write like this to explain your command to other coder by adding this (--) before the line 
 -- You can select the code and then click ctrl+b to make it look more beautiful or you can say more organise and by select the code and clicking on ctrl+enter to run the code
-
 -- Firstly we are going to create a database to store all table 
 CREATE DATABASE Homerevison;
 
@@ -29,6 +29,7 @@ INSERT INTO student(id,name,gender) values
 -- To see table (*) mean all 
 SELECT * FROM student;
 
+
 -- 02/07/2025 (Wednesday) 
 
 -- UNIQUE mean only one, PRIMARY KEY mean it is like a mix of UNIQUE and NOT NULL 
@@ -43,6 +44,7 @@ INSERT INTO department(Did,Dname,Dlocation) values
 (1, "Mayank Bhatt", "Delhi"),
 (2, "Dexant Bhatt","Delhi"),
 (3, "Sonali Bhatt", "UP");
+
 
 -- 03/07/2025 (Thursday) 
 
@@ -112,6 +114,7 @@ INSERT INTO emp1(e_id,Age) VALUES
 -- see the table but you can see E_name New Joiner because will creating table we put default value in emp1 
 SELECT * FROM emp1;
 
+
 -- 9/7/2025 (Monday)
 
 -- reviseing 
@@ -149,7 +152,6 @@ P_id INT PRIMARY KEY,
 P_name VARCHAR(30)
 );
 
-
 -- we created this table so we can make a relation between many to many 
 CREATE TABLE Product_emp_Branch(
 id INT PRIMARY KEY,
@@ -158,6 +160,7 @@ e_id INT,
 CONSTRAINT FOREIGN KEY(Branch_id) REFERENCES Branch(Branch_id),
 CONSTRAINT FOREIGN KEY(e_id) REFERENCES employee(e_id)
 );
+
 
 -- 10/7/2025 (Wednesday)
 
@@ -208,6 +211,7 @@ SELECT * FROM product;
 ('2022-04-06',5,1003);
 SELECT * FROM Product_emp;
 
+
 -- 11/7/2025 (Friday)
 
 -- Useing database that you prefer
@@ -249,7 +253,7 @@ ALTER TABLE Parson RENAME Mayank;
 SELECT * FROM Mayank;
 
 
--- 15/7/2025
+-- 15/7/2025 (Tuesday)
 
 -- useing the database we changed name of the database 
 USE mayank;
@@ -269,8 +273,14 @@ ALTER TABLE course MODIFY credits INT UNIQUE;
 ALTER TABLE course MODIFY Bhatt VARCHAR(45) DEFAULT "Bhatt";
 ALTER TABLE COURSE ADD CONSTRAINT title CHECK (title IN ("Delhi","Mayank"));
 
+-- to see if  all thing work good  
+SELECT * FROM course;
+DESC course;
+INSERT INTO course (Bhatt,title,credits)VALUES
+("so","BHATT",2);
 
--- 16/7/2025
+
+-- 16/7/2025 (wednesday)
 
 -- Useing the database
 USE mayank;
@@ -300,8 +310,4 @@ ALTER TABLE orders DROP FOREIGN KEY cust_order1;
 INSERT INTO orders VALUES(01, "2025-07-16","adc",123);
 SELECT * FROM orders;
 
--- to see if  all thing work good  
-SELECT * FROM course;
-DESC course;
-INSERT INTO course (Bhatt,title,credits)VALUES
-("so","BHATT",2);
+
