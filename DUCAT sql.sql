@@ -1,4 +1,4 @@
-/* 01/07/2025 (Tusesday)*/
+-- 01/07/2025 (Tusesday)
 
 -- all ways end the command with ; it is like a full stop for sql you can write like this to explain your command to other coder and you
 -- can click ctrl+b to make it look more beautiful 
