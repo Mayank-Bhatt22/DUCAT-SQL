@@ -1,17 +1,18 @@
+/* 01/07/2025 (Tusesday)*/
 
--- 01/07/2025 (Tusesday)
+-- all ways end the command with ; it is like a full stop for sql you can write like this to explain your command to other coder and you
+-- can click ctrl+b to make it look more beautiful 
 
--- All ways end the command with ; it is like a full stop for sql you can write like this to explain your command to other coder by adding this (--) before the line 
--- You can select the code and then click ctrl+b to make it look more beautiful or you can say more organise and by select the code and clicking on ctrl+enter to run the code
--- Firstly we are going to create a database to store all table 
+-- firstly we are going to create a database to store all table 
 CREATE DATABASE Homerevison;
 
 -- So we have created the database we are telling computer to use it 
 USE Homerevison;
 
--- Now we are going to make table for the database to store data INT means number, VARCHAR mean to write some word, CHAR means also are for words and
--- NOT NULL mean that you can not leave this place empty 
-CREATE TABLE student(
+-- Now we are going to make table for the database to store data INT means number, VARCHAR mean to write some word, CHAR means also are 
+-- words and NOT NULL mean that you can not leave this place empty 
+CREATE TABLE student
+(
 id INT NOT NULL,
 name VARCHAR(30),
 gender CHAR(10)
@@ -26,9 +27,8 @@ INSERT INTO student(id,name,gender) values
 (2, "Dexant Bhatt", "Male"),
 (3, "Sonali Bhatt", "Female");
 
--- To see table (*) mean all 
+-- To see table * mean all 
 SELECT * FROM student;
-
 
 -- 02/07/2025 (Wednesday) 
 
@@ -39,21 +39,20 @@ Dname VARCHAR(30) UNIQUE,
 Dlocation VARCHAR(30) NOT NULL
 );
 
--- To INSERT the data in the table 
-INSERT INTO department(Did,Dname,Dlocation) values
+-- to INSERT the data in the table 
+INSERT INTO department(Did,Dname,Dlocation) VALUES
 (1, "Mayank Bhatt", "Delhi"),
 (2, "Dexant Bhatt","Delhi"),
 (3, "Sonali Bhatt", "UP");
 
-
 -- 03/07/2025 (Thursday) 
 
--- To delete the table we use DROP TABLE and we can drop the database also by DROP DATABASE
+-- to delete the table we use DROP TABLE and we can drop the database also by DROP DATABASE
 DROP TABLE Department;
 
--- Create table to link other table you can say there are two type of table parent table and child table here we are linking Department to employee meaning 
--- we will be useing departmnet column in employee table 
-CREATE TABLE Department(
+-- Create table to link other table you can say there are two type of table parent table and child table here we are linking Department to 
+-- employee meaning we will be useing departmnet column in employee table 
+CREATE TABLE Department (
  D_id INT PRIMARY KEY, 
  D_name VARCHAR(25) UNIQUE
  );
@@ -70,6 +69,8 @@ D_id INT,
 CONSTRAINT FOREIGN KEY(D_id) REFERENCES Department (D_id)
 );
 
+
+-- 08/07/2025 (Tuesday)
 -- INSERT data in department 
 INSERT INTO department (D_id,D_name) VALUES
 (101,"HR"),
@@ -115,14 +116,12 @@ INSERT INTO emp1(e_id,Age) VALUES
 SELECT * FROM emp1;
 
 
--- 9/7/2025 (Monday)
+-- 9/6/2025 (wednesday)
+DROP DATABASE Company1;
 
--- reviseing 
-DROP DATABASE Company;
+CREATE DATABASE company1;
 
-CREATE DATABASE company;
-
-USE company;
+USE company1;
 
 CREATE TABLE Branch(
 Branch_id INT PRIMARY KEY,
@@ -147,23 +146,29 @@ D_id INT,
 CONSTRAINT FOREIGN KEY(D_id) REFERENCES Department (Dep_id)
 );
 
-CREATE TABLE Product(
-P_id INT PRIMARY KEY,
-P_name VARCHAR(30)
+Create table Product(
+P_id int primary key,
+P_name Varchar(30),
+Branch_id int,
+constraint foreign key(Branch_id) references Branch(Branch_id)
 );
 
 -- we created this table so we can make a relation between many to many 
-CREATE TABLE Product_emp_Branch(
-id INT PRIMARY KEY,
-Branch_id INT,
-e_id INT,
-CONSTRAINT FOREIGN KEY(Branch_id) REFERENCES Branch(Branch_id),
-CONSTRAINT FOREIGN KEY(e_id) REFERENCES employee(e_id)
+Create table Product_emp(
+Start_date Date primary key,
+P_id int,
+e_id int,
+constraint foreign key(p_id) references Product(p_id),
+constraint foreign key(e_id) references employee(e_id)
 );
 
+-- INT for numbers and BIGINT for big number
+-- FLOAT for number like (1.00) and DOUBLE for number like (1.998443)
+-- CHAR() for one word, VARCHAR() for more then one word and TEXT for write a text 
+-- DATE for date and DATETIME for date & time 
 
--- 10/7/2025 (Wednesday)
 
+-- 10/7/2025 (Thusday)
 -- Revison of inserting data 
 INSERT INTO Branch VALUES
 (01,"Management Branch","Delhi"),
@@ -211,8 +216,7 @@ SELECT * FROM product;
 ('2022-04-06',5,1003);
 SELECT * FROM Product_emp;
 
-
--- 11/7/2025 (Friday)
+-- 11/7/2025 (friday)
 
 -- Useing database that you prefer
 USE College;
@@ -252,25 +256,25 @@ ALTER TABLE Parson RENAME Mayank;
 -- To see every thing is good 
 SELECT * FROM Mayank;
 
-
 -- 15/7/2025 (Tuesday)
 
--- useing the database we changed name of the database 
+-- useing the database we changed name ok the database 
 USE mayank;
 
--- To renameing the column name of the table
+-- TO renameing the column name of the table
 ALTER TABLE course RENAME COLUMN course_id TO BHATT; 
 
 -- To remove all the data of the table without droping the table
 TRUNCATE TABLE course;
 
 -- Add Constraint primary key in the column 
- ALTER TABLE course ADD UNIQUE (TITLE);
+ALTER TABLE course ADD UNIQUE (TITLE);
 
--- how can we change Constraint and charteristic in one line
+-- You can change Constraint and charteristic in one line
 ALTER TABLE course MODIFY title VARCHAR(45) NOT NULL;
 ALTER TABLE course MODIFY credits INT UNIQUE;
 ALTER TABLE course MODIFY Bhatt VARCHAR(45) DEFAULT "Bhatt";
+
 ALTER TABLE COURSE ADD CONSTRAINT title CHECK (title IN ("Delhi","Mayank"));
 
 -- to see if  all thing work good  
@@ -281,7 +285,6 @@ INSERT INTO course (Bhatt,title,credits)VALUES
 
 
 -- 16/7/2025 (wednesday)
-
 -- Useing the database
 USE mayank;
 
@@ -311,3 +314,49 @@ INSERT INTO orders VALUES(01, "2025-07-16","adc",123);
 SELECT * FROM orders;
 
 
+-- 17/07/2025 (Thursday)
+
+-- Ways to insert the data in the table
+CREATE table XYZ(
+A INT,
+B VARCHAR(30),
+C FLOAT,
+D DATE
+);
+
+-- Type no 1 to add one row
+INSERT INTO XYZ VALUES (3, "ABCD", 4.56, '2005-09-21');
+
+-- Type no 2 to add more then one in one time
+INSERT INTO XYZ VALUES 
+(1, "ABCD", 4.56, '2005-09-21'),
+(2, "EFGH", 5.67, '2005-04-22');
+
+-- Type no 3 to add data in selected column 
+INSERT INTO XYZ (B,D)VALUES 
+("ABCD",'2005-09-21'),
+("EFGH",'2005-04-22');
+
+-- Type no 4 nothing new but it can solve some maths 
+INSERT INTO XYZ(A,C) VALUES (7,10+(20/5));
+
+-- Checking everything
+SELECT * FROM XYZ;
+
+-- Use of auto_increment it is used for to count something like we give everyone id so we have to give one id then we don't need to add Anything after we tell sql the one
+-- id it will now count it by himself like first id we gave was 1 then we don't need to add id after That will count it from the number we give it in our case 1,2,3,4,5,____
+-- and so on if it was 100,101,102,103,____  
+CREATE TABLE bhatt(
+A INT PRIMARY KEY AUTO_INCREMENT,
+B VARCHAR(30) DEFAULT("Mayank"),
+C FLOAT,
+D DATE
+);
+
+-- Trying to add data
+INSERT INTO bhatt (a, c, d) VALUES (100,12.44,'2005-04-22');
+INSERT INTO bhatt (c, d) VALUES (12.44,'2005-04-22');
+SELECT * FROM bhatt;
+
+
+-- 19/07/2025 (Friday)
