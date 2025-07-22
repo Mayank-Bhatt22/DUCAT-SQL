@@ -360,3 +360,71 @@ SELECT * FROM bhatt;
 
 
 -- 19/07/2025 (Friday)
+-- Useing the dataset
+USE mayank;
+
+-- use of Decimal(6,2) it means you can put like 6 number in it like 100000 and 2 means (.) before that number from last like 1000.00 
+-- Default(now()) in datetime means it is used to put the date and correct timeing in which data was stored 
+CREATE TABLE bhatt2(
+A INT PRIMARY KEY AUTO_INCREMENT,
+B VARCHAR(30) DEFAULT("Mayank"),
+C DECIMAL (6,2), -- 1000.00
+D DATETIME DEFAULT (now())
+);
+
+-- Inserting the data 
+INSERT INTO bhatt2 VALUES (200,"mayank",4.7,'2002-09-23');
+INSERT INTO bhatt2 (b,c,d)VALUES ("mayank",2234.7445,'2005-09-13');
+INSERT INTO bhatt2 (b,c) VALUES("anuj",2224.23);
+SELECT * FROM bhatt2;
+
+-- use of default (curdate()) in datatime it is used to only put the data only
+CREATE table bhatt3(
+A INT PRIMARY KEY AUTO_INCREMENT,
+B VARCHAR(30) DEFAULT("Mayank"),
+C DECIMAL (6,2), -- 1000.00
+D DATETIME DEFAULT (curdate())
+);
+
+-- inserting the data
+INSERT INTO bhatt3 VALUES (200,"mayank",4.7,'2002-09-23');
+INSERT INTO bhatt3 (b,c,d) VALUES ("mayank",2234.7445,'2005-09-13');
+INSERT INTO bhatt3 (b,c) VALUES ("anuj",2224.23);
+SELECT * FROM bhatt3;
+
+-- Nothing new here
+CREATE table bhatt3(
+A INT PRIMARY KEY AUTO_INCREMENT,
+B VARCHAR(30) DEFAULT("Mayank"),
+C DECIMAL (6,2), -- 1000.00
+D DATETIME DEFAULT (curdate())
+);
+
+-- Inserting data by default,default which will fill the default value given in table
+INSERT INTO bhatt4 VALUES (202,"mayank",DEFAULT,DEFAULT);
+SELECT * FROM bhatt4;
+
+-- createing the table to copy the data from another table
+CREATE table bhatt3(
+A INT PRIMARY KEY,
+B VARCHAR(30),
+C DECIMAL, 
+D DATETIME
+);
+
+-- Select * from in insert is used to copy the data from another table but the column name and there type should be same
+INSERT INTO bhatt5(a,b,c,d) SELECT * FROM bhatt;
+SELECT * FROM bhatt5;
+
+-- delete from is use to delete data from the table and wrhere is used to tell where to see for it
+DELETE FROM bhatt5 WHERE a=104;
+DELETE FROM bhatt5 WHERE b="mayank";
+
+-- sql make sure you are 100% sure about deleting anything so if you are sure about it so we remove safe update from it by set sql_safe_updates=0;
+SET sql_safe_updates=0;
+
+-- it is same like truncate to remove all data from it 
+DELETE FROM bhatt5;
+
+
+-- 23/07/2025 (wednesday)
