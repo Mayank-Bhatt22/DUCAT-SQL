@@ -427,4 +427,96 @@ SET sql_safe_updates=0;
 DELETE FROM bhatt5;
 
 
+-- 22/07/2025 (Tuseday) 
+-- useing batch4pm
+USE batch4pm;
+
+-- Limit 1 is used to give the number of lines of data you want
+SELECT e_id,e_name FROM employee LIMIT 1;
+
+-- Drop tables if already exist
+DROP TABLE IF EXISTS Employee;
+DROP TABLE IF EXISTS Department;
+
+-- Create Department Table
+CREATE TABLE Department (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(100),
+    Location VARCHAR(100)
+);
+
+INSERT INTO Department (DepartmentID, DepartmentName, Location) VALUES
+(1, 'HR', 'Delhi'),
+(2, 'Finance', 'Mumbai'),
+(3, 'IT', 'Bangalore'),
+(4, 'Sales', 'Chennai'),
+(5, 'Support', 'Hyderabad');
+
+-- Create Employee Table
+CREATE TABLE Employee (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DepartmentID INT,
+    ManagerID INT,
+    Salary DECIMAL(10, 2),
+    JoinDate DATE,
+    FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+);
+
+INSERT INTO Employee (EmployeeID, Name, DepartmentID, ManagerID, Salary, JoinDate) VALUES
+(101, 'Amit Sharma', 1, NULL, 60000, '2022-01-15'),
+(102, 'Bhavna Mehra', 2, 101, 55000, '2022-03-18'),
+(103, 'Chirag Verma', 3, 101, 65000, '2022-05-22'),
+(104, 'Deepa Rawat', 3, 103, 70000, '2022-07-25'),
+(105, 'Eshan Singh', 4, 101, 48000, '2022-09-29'),
+(106, 'Farah Khan', 5, 101, 52000, '2022-11-30'),
+(107, 'Gaurav Patel', 1, 101, 58000, '2023-01-10'),
+(108, 'Heena Das', 2, 102, 61000, '2023-02-15'),
+(109, 'Imran Ali', 3, 103, 54000, '2023-03-21'),
+(110, 'Jyoti Rana', 4, 105, 47000, '2023-04-18'),
+(111, 'Kunal Joshi', 5, 106, 51000, '2023-05-20'),
+(112, 'Lata Sharma', NULL, NULL, 40000, '2023-06-12'),  -- No department (test LEFT JOIN)
+(113, 'Manoj Bhat', 1, 107, 63000, '2023-07-25'),
+(114, 'Nisha Jain', 2, 108, 57000, '2023-08-30'),
+(115, 'Omkar Rao', 3, 104, 75000, '2023-09-05'),
+(116, 'Pooja Sen', 4, 110, 49000, '2023-10-10'),
+(117, 'Qasim Sheikh', NULL, NULL, 42000, '2023-11-11'), -- No department
+(118, 'Ritika Ghosh', 5, 106, 53000, '2023-12-01'),
+(119, 'Sanjay Sinha', 1, 107, 62000, '2024-01-01'),
+(120, 'Tina Kaur', 2, 102, 58000, '2024-02-12'),
+(121, 'Uday Bhatt', 3, NULL, 67000, '2024-03-15');
+
+SELECT * FROM Employee;
+
+-- Where is used to see where is the thing 
+SELECT * FROM Employee WHERE EmployeeID=107;
+SELECT * FROM Employee WHERE DepartmentID=1;
+SELECT * FROM Employee WHERE ManagerID=107;
+
+-- You can use ( +, -, *, / ) in select 
+SELECT Salary+1000 FROM Employee;
+SELECT (salary+(salary*10)/100) FROM Employee;
+SELECT salary*1.10 FROM Employee;
+
+-- you can use ( <, >, <=, >=, != ) in select
+SELECT * FROM Employee WHERE salary<50000;
+SELECT * FROM Employee WHERE salary>50000;
+SELECT * FROM Employee WHERE salary<=50000;
+SELECT * FROM Employee WHERE salary>=50000;
+SELECT * FROM Employee WHERE salary!=50000;
+
+-- and in select is to confirm both statement 
+ SELECT * FROM Employee WHERE salary>50000 AND DepartmentID=1;
+-- or in select is to confirm if first statment is ture if not check for second name
+SELECT * FROM Employee WHERE salary>50000 OR ManagerID=102;
+
+-- we can use ( count, sum, min, max, avg ) in select
+SELECT COUNT(*) FROM Employee; 
+SELECT COUNT(DepartmentID) FROM Employee;
+SELECT sum(Salary) FROM Employee; 
+SELECT max(Salary) FROM Employee; 
+SELECT min(Salary) FROM Employee; 
+SELECT avg(Salary) FROM Employee;
+
+
 -- 23/07/2025 (wednesday)
