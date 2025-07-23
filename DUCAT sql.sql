@@ -519,4 +519,50 @@ SELECT min(Salary) FROM Employee;
 SELECT avg(Salary) FROM Employee;
 
 
--- 23/07/2025 (wednesday)
+-- 23/7/2025 (wednesday)
+-- useing the database
+USE batch4pm;
+
+-- use of (where) and (and) in select 
+SELECT * FROM employee WHERE salary!=50000 and DepartmentID=1;
+
+-- use of like Operator in select like is used to show like this one
+SELECT * FROM employee WHERE name LIKE "A%"; -- any value start with a
+SELECT * FROM employee WHERE name LIKE "%A"; -- any value that end with a
+SELECT * FROM employee WHERE name LIKE "%A%"; -- any value that have a in it
+SELECT * FROM employee WHERE name LIKE "_A%"; -- any value that have a in second position
+SELECT * FROM employee WHERE name LIKE "A_%"; -- any value that start with a and are at least 2 charaters in length
+SELECT * FROM employee WHERE name LIKE "A__%"; -- any value that start with a and are at least 3 charaters in length
+SELECT * FROM employee WHERE name LIKE "A%A"; -- find any values that start with a and end with a 
+
+-- use of distinct is it find the unique values in data 
+SELECT DISTINCT(departmentID) FROM employee;
+SELECT DISTINCT(departmentID) FROM employee where DepartmentID IS NOT NULL;
+
+-- use of IN is which was these value in it
+SELECT * FROM employee WHERE name IN ("Amit Sharma", "uday Bhatt", "Manyank Bhatt");
+SELECT * FROM employee WHERE salary IN (40000,55000,40000);
+
+-- (between) and (add) is used to see anything which between the data
+SELECT * FROM employee WHERE salary BETWEEN 40000 AND 55000;
+
+-- order by is used order things in table in asc and desc
+SELECT * FROM employee ORDER BY SALARY ASC;
+SELECT * FROM employee ORDER BY SALARY DESC;
+
+-- group by is used in makeing the group 
+SELECT DepartmentID,sum(Salary) FROM Employee GROUP BY DepartmentID;
+SELECT DepartmentID,max(Salary) FROM Employee GROUP BY DepartmentID;
+SELECT DepartmentID,min(Salary) FROM Employee GROUP BY DepartmentID;
+SELECT DepartmentID,avg(Salary) FROM Employee GROUP BY DepartmentID;
+
+
+SELECT * FROM employee;
+-- use of count() and group by in one line
+SELECT DepartmentID,COUNT(*) FROM Employee GROUP BY DepartmentID;
+SELECT EmployeeID,COUNT(*) FROM Employee GROUP BY EmployeeID;
+
+-- use of count(), group by and order by in one line;
+SELECT DepartmentID,COUNT(*) FROM Employee GROUP BY DepartmentID ORDER BY COUNT(*);
+
+
