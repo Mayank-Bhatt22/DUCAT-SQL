@@ -566,3 +566,23 @@ SELECT EmployeeID,COUNT(*) FROM Employee GROUP BY EmployeeID;
 SELECT DepartmentID,COUNT(*) FROM Employee GROUP BY DepartmentID ORDER BY COUNT(*);
 
 
+-- 24/7/2025 (Thursday) 
+
+-- using the database
+USE batch4pm;
+
+-- did some question 
+SELECT departmentID,sum(salary) AS total_salary FROM Employee GROUP BY DepartmentID HAVING Total_salary>150000;
+SELECT departmentID,avg(salary) AS avg_salary FROM Employee GROUP BY DepartmentID HAVING avg_salary<55000; 
+SELECT ManagerID,count(EmployeeID) AS employee FROM Employee GROUP BY ManagerID HAVING Employee>2 AND ManagerID IS NOT NULL; 
+SELECT ManagerID,count(EmployeeID) AS employee FROM Employee WHERE managerID IS NOT NULL GROUP BY ManagerID HAVING Employee>2; 
+SELECT * FROM Employee WHERE DepartmentID IS NULL;
+SELECT * FROM employee ORDER BY JoinDate DESC;
+SELECT * FROM employee ORDER BY Name ASC;
+SELECT * FROM Department ORDER BY departmentName ASC;
+SELECT * FROM employee ORDER BY salary DESC LIMIT 5;
+
+-- round used in int to round things up 
+SELECT EmployeeID,Name,round(((salary-(salary*5)/100))) as salary FROM Employee;
+
+
