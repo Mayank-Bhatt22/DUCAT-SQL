@@ -586,3 +586,33 @@ SELECT * FROM employee ORDER BY salary DESC LIMIT 5;
 SELECT EmployeeID,Name,round(((salary-(salary*5)/100))) as salary FROM Employee;
 
 
+-- 7/25/2025 (Friday)
+USE batch4pm;
+
+-- Merge to join two table in one select but it need something same in both table to join
+-- Some ude case of Merge
+SELECT * FROM Employee, department WHERE Employee.DepartmentID=department.departmentID;
+SELECT * FROM Employee E, department D WHERE E.DepartmentID=D.departmentID;
+SELECT E.EmployeeID,E.Name,D.DepartmentID,D.DepartmentName,E.ManagerID,D.Location,E.salary,E.JoinDate FROM Employee E, department D 
+ WHERE E.DepartmentID=D.departmentID;
+SELECT E.EmployeeID,E.Name,D.DepartmentID,D.DepartmentName,E.ManagerID,D.Location,E.salary,E.JoinDate FROM Employee E, department D 
+ WHERE E.DepartmentID=D.departmentID AND D.DepartmentName="hr";
+SELECT E.EmployeeID,E.Name,D.DepartmentID,D.DepartmentName,E.ManagerID,D.Location,E.salary,E.JoinDate FROM Employee E, department D 
+ WHERE E.DepartmentID=D.departmentID AND D.LOCaTION="Bangalore";
+SELECT count(EmployeeID) FROM Employee E, department D 
+ WHERE E.DepartmentID=D.departmentID AND D.DepartmentName="IT";
+
+-- Returns only the rows where there is a match in both tables (common in both)
+SELECT * FROM EMPLOYEE AS E INNER JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID;
+
+-- Returns all rows from the left table, plus matching rows from the right table. 
+-- If there’s no match in the right table, you get NULLs
+SELECT * FROM EMPLOYEE AS E LEFT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID;
+
+-- Returns all rows from the right table, plus matching rows from the left table.
+-- If there’s no match in the left table, you get NULLs
+SELECT * FROM EMPLOYEE AS E RIGHT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID;
+
+-- Returns all rows from both tables. If there’s no match in one table, the other side shows NULLs
+SELECT * FROM EMPLOYEE AS E LEFT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID UNION 
+SELECT * FROM EMPLOYEE AS E RIGHT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID;
