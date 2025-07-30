@@ -613,6 +613,122 @@ SELECT * FROM EMPLOYEE AS E LEFT JOIN DEPARTMENT D ON E.DepartmentID=D.departmen
 -- If there’s no match in the left table, you get NULLs
 SELECT * FROM EMPLOYEE AS E RIGHT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID;
 
--- Returns all rows from both tables. If there’s no match in one table, the other side shows NULLs
+-- Returns all rows from both tables. If there’s no match in one table, the other side shows NULLs 
+-- UNION is used to combine the results of two or more SELECT queries into a single result set — and it removes duplicate rows by default.
 SELECT * FROM EMPLOYEE AS E LEFT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID UNION 
 SELECT * FROM EMPLOYEE AS E RIGHT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID;
+
+-- UNION ALL is used to combine the results of two or more SELECT queries, just like UNION, but it does NOT remove duplicates.
+SELECT * FROM EMPLOYEE AS E LEFT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID 
+UNION ALL
+SELECT * FROM EMPLOYEE AS E RIGHT JOIN DEPARTMENT D ON E.DepartmentID=D.departmentID;
+
+-- 29/7/2025 (Tuesday)
+
+-- Useing Database
+USE batch4pm;
+
+-- createing table 
+CREATE TABLE PROJECT2(
+P_id int primary key auto_increment,
+name varchar(50),
+no_emp int,
+r_date date
+);
+
+Insert into project2 (P_id,name,no_emp,r_date) values
+(1,'AI Chatbot', 5, '2023-08-01');
+INSERT INTO project2(name, no_emp, R_date) VALUES
+('Fraud Detection', 3, '2023-09-15'),
+('Sales Dashboard', 4, '2023-07-10'),
+('Customer Segmentation', 2, '2023-06-20'),
+('HR Analytics', 6, '2023-10-01'),
+('Inventory Forecasting', 3, '2023-09-25'),
+('Loan Default Prediction', 5, '2023-08-10'),
+('Healthcare AI', 2,'2023-07-22');
+
+-- createing table 
+CREATE TABLE PROJECT3(
+P_id int primary key auto_increment,
+name varchar(50),
+no_emp int,
+r_date date
+);
+
+INSERT INTO project3 (p_id,name, no_emp, R_date) VALUES
+(1,'AI Chatbot', 5, '2023-08-01'),
+(2,'Fraud Detection', 3, '2023-09-15'),
+(3,'Sales Dashboard', 4, '2023-07-10'),
+(18,'Customer Segmentation', 2, '2023-06-20'),
+(10,'HR Analytics', 6, '2023-10-01'),
+(12,'Inventory Forecasting', 3, '2023-09-25'),
+(15,'Loan Default Prediction', 5, '2023-08-10'),
+(17,'Healthcare AI', 2,'2023-07-22');
+
+-- createing table 
+create table employee12(
+e_id int primary key auto_increment,
+E_name varchar(30),
+department varchar(30),
+p_id int,
+salary int
+);
+
+INSERT INTO employee12(E_id,E_name, department, p_id, salary) VALUES
+(1,"mayank",'Analytics',1,50000);
+INSERT INTO employee12(E_name, department, p_id, salary) VALUES
+('Rahul', 'Data Science', 1, 55000),
+('Priya', 'Data Science', 1, 58000),
+('Ankit', 'Analytics', 12, 60000),
+('Neha', 'BI', 3, 50000),
+('Karan', 'Marketing', 3, 45000),
+('Sonal', 'HR', NULL, 47000),
+('Deepak', 'Finance', NULL, 52000),
+('Simran', 'Data Science', 4, 61000),
+('Amit', 'Marketing', 5, 53000),
+('Manish', 'Analytics', 5, 56000),
+('Pooja', 'HR', 11, 49000),
+('Rohit', 'Analytics', NULL, 62000),
+('Meena', 'IT', 4, 65000),
+('Vikas', 'Healthcare', 2, 50000),
+('Rani', 'Healthcare',NULL,48000),
+('Ajay', 'BI',3, 51000);
+
+-- Inner Join
+select * from Employee12 E inner join Project2 P ON E.P_Id=P.P_Id;
+
+-- Left Join
+select * from Employee12 E Left join Project2 P ON E.P_Id=P.P_Id;
+
+-- Right Jion
+select * from Employee12 E Right join Project2 P ON E.P_Id=P.P_Id;
+
+-- Union Join
+select * from project2 
+union 
+select * from project3;
+
+-- Union all
+select * from project2
+union all
+select * from project3;
+
+-- Creteing table to see for cross join
+create table cloths(
+id int,
+name varchar (50)
+);
+
+insert into cloths values(101,"Jins"),(102,"shit"),(103,"shose");
+
+create table colour(
+id int,
+name varchar (50)
+);
+
+insert into colour values(1,"red"),(2,"yellow"),(3,"green");
+
+-- CROSS JOIN returns the Cartesian product of two tables — meaning it combines every row from the first table with every row from the second.
+select * from cloths cross join colour;
+select c1.name, c2.name from cloths c1 cross join colour c2;
+
