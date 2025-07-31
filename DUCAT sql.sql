@@ -732,3 +732,19 @@ insert into colour values(1,"red"),(2,"yellow"),(3,"green");
 select * from cloths cross join colour;
 select c1.name, c2.name from cloths c1 cross join colour c2;
 
+
+-- 30/7/2025 (wednesday)
+ 
+-- useing database
+use batch4pm;
+
+select * from employee;
+
+-- distinct is like unique used in select 
+select distinct managerId FROM EMPLOYEE;
+
+-- A SELF JOIN is when a table is joined with itself — it's useful when you want to compare rows within the same table, 
+-- like finding a manager of an employee, or comparing items in a hierarchy.
+SELECT * FROM EMPLOYEE E1 JOIN EMPLOYEE E2 ON E1.EMPLOYEEid= E2.MANAGERid;
+SELECT E1.NAME AS EMPLOYEE_NAME ,E2.NAME AS MANAGER FROM EMPLOYEE E1 JOIN EMPLOYEE E2 ON E1.MANAGERid = E2.EMPLOYEEid;
+SELECT distinct E2.NAME AS MANAGER FROM EMPLOYEE E1 JOIN EMPLOYEE E2 ON E1.MANAGERid = E2.EMPLOYEEid;
