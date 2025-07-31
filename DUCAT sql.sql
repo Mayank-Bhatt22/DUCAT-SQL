@@ -748,3 +748,34 @@ select distinct managerId FROM EMPLOYEE;
 SELECT * FROM EMPLOYEE E1 JOIN EMPLOYEE E2 ON E1.EMPLOYEEid= E2.MANAGERid;
 SELECT E1.NAME AS EMPLOYEE_NAME ,E2.NAME AS MANAGER FROM EMPLOYEE E1 JOIN EMPLOYEE E2 ON E1.MANAGERid = E2.EMPLOYEEid;
 SELECT distinct E2.NAME AS MANAGER FROM EMPLOYEE E1 JOIN EMPLOYEE E2 ON E1.MANAGERid = E2.EMPLOYEEid;
+
+
+-- 31/1/2025 (Thursday)
+
+-- useing database
+use batch4pm;
+
+SELECT E1.NAME AS EMPLOYEE_NAME, E2.NAME AS MANAGER, E1.DEPARTMENTID FROM EMPLOYEE E1 JOIN EMPLOYEE E2 ON E1.MANAGERid = E2.EMPLOYEEid 
+WHERE E1.DEPARTMENTID != E2.DEPARTMENTID;
+
+-- A subquery is a SQL query that is written inside another query.
+-- It helps you get data that the main (outer) query depends on.
+select name,max(salary) from employee;
+select * from employee where salary=75000;
+
+-- Uncorrelated= The inner query is independent of the outer query. 
+-- It executes once, returning a set of results used by the outer query.
+select * from employee where salary = (select max(salary) from employee);
+-- find the record of employee who get more salary then avg salary
+SELECT Name, Salary FROM Employee WHERE Salary > (SELECT AVG(Salary) FROM Employee);
+-- find the name of emp whose salary is high then manager
+SELECT Name, Salary FROM Employee WHERE Salary > (SELECT Salary FROM Employee where employeeID = managerID);
+
+-- Correlated= The inner query depends on the outer query. 
+-- Each iteration of the outer query runs the inner query with the current row's value.
+SELECT Name, Salary FROM Employee E WHERE Salary > (SELECT Salary FROM Employee WHERE EmployeeID = E.ManagerID);
+
+-- Nested= Multiple subqueries are nested within each other. 
+-- The innermost query executes first, and the results are used by the next query, and so on.
+select *,(select avg(salary) from employee ) as avg_salary from employee;
+
