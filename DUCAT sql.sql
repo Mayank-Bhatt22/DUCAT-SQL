@@ -779,3 +779,86 @@ SELECT Name, Salary FROM Employee E WHERE Salary > (SELECT Salary FROM Employee 
 -- The innermost query executes first, and the results are used by the next query, and so on.
 select *,(select avg(salary) from employee ) as avg_salary from employee;
 
+
+-- 1/8/2025 (friday)
+
+-- Test day
+
+-- 5/8/2025 (Tuesday)
+
+-- Useing the Database
+use batch4pm;
+
+SELECT E1.NAME AS EMPLOYEE_NAME, E2.NAME AS MANAGER, E1.DEPARTMENTID FROM EMPLOYEE E1 JOIN EMPLOYEE E2 ON E1.MANAGERid = E2.EMPLOYEEid 
+WHERE E1.DEPARTMENTID != E2.DEPARTMENTID;
+select name,max(salary) from employee;
+select * from employee where salary=75000;
+
+-- subquery
+select * from employee where salary = (select max(salary) from employee);
+-- find the record of employee who get more salary then avg salary
+SELECT Name, Salary FROM Employee WHERE Salary > (SELECT AVG(Salary) FROM Employee);
+-- find the name of emp whose sAlary is high then manager
+SELECT Name, Salary FROM Employee WHERE Salary > (SELECT Salary FROM Employee where employeeID = managerID);
+SELECT Name, Salary FROM Employee E WHERE Salary > (SELECT Salary FROM Employee WHERE EmployeeID = E.ManagerID);
+select *,(select avg(salary) from employee ) as avg_salary from employee;
+
+
+use homework;
+
+Select * from employee;
+Select * from Department;
+
+
+-- 1. Find the employee(s) who earns the maximum salary.
+select name from employee where salary = (select max(salary) from employee);
+
+-- 2. List employees who earn more than the average salary of all employees.
+SELECT Name, Salary FROM Employee WHERE Salary > (SELECT AVG(Salary) FROM Employee);
+
+-- 3. Find the department name of the employee ‘Omkar Rao’.
+select departmentName from department where departmentID = (select departmentID from employee where name = "Omkar Rao");
+
+-- (5/8/2024) tuesday
+ 
+use batch4pm;
+
+-- string
+-- 1 length 
+select length("mayank") as length;
+select name,length("mayank") as length from employee;
+
+-- 2. concat
+select concat("Hello"," ","Bhatt"); 
+select DepartmentID, concat(DepartmentName,"-",Location) as name_location from department;
+
+-- 3.lower
+select lower("mayank");
+select lower(DepartmentName) from Department;
+
+-- 4.upper
+select upper("mayank");
+select upper(DepartmentName) from Department;
+
+-- 5. left
+select left("mayank",4);
+select left(name,1) from employee;
+
+-- 6. right
+select right("mayank",4);
+select right(name,1) from employee;
+
+-- 7. substring   # substring("mayank",2,4)
+select substring("mayank",2,4);
+
+-- 8. substr 
+select substr("mayank",2,4);
+
+-- 9. replace
+select substring("mayank",2,4);
+
+-- 10. ltrim
+select ltrim("          Mayank        ");
+
+-- 11.rtrim
+select rtrim("          Mayank        ");
