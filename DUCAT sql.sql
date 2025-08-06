@@ -819,3 +819,43 @@ SELECT Name, Salary FROM Employee WHERE Salary > (SELECT AVG(Salary) FROM Employ
 -- 3. Find the department name of the employee ‘Omkar Rao’.
 select departmentName from department where departmentID = (select departmentID from employee where name = "Omkar Rao");
 
+
+-- 6/8/25 (Wednesday)
+
+-- Useing homework
+Use homework;
+
+-- In= Used for Matching Values from a List/Subquery
+-- Use when: You want to filter rows based on matching values from a list or another table. The subquery returns a list of values (1 column only).
+-- Think of it like: “Is this value in that list?”
+SELECT Name FROM Employee WHERE DepartmentID IN (SELECT DepartmentID FROM Department);
+
+-- NOT IN — Used for Finding Values NOT in a List
+-- Use when: You want to exclude rows that match values from another table or list. The subquery must not contain NULL, or it may return no rows at all!
+-- Think of it like: “Is this value not in that list?”
+SELECT Name FROM Employee WHERE DepartmentID NOT IN (SELECT DepartmentID FROM Department WHERE DepartmentID IS NOT NULL);
+
+-- EXISTS — Used for Checking If a Match Exists
+-- Use when: You want to check existence of related rows in another table. It returns TRUE if any row is found — it stops checking after finding the first match (faster in some cases).
+-- Think of it like: “Does this row have a match?”
+SELECT DepartmentName FROM Department D WHERE EXISTS (SELECT 1 FROM Employee E WHERE E.DepartmentID = D.DepartmentID);
+
+-- NOT EXISTS — Used to Check If No Match Exists
+-- Use when: You want to find rows that have no related data in another table. Best for anti-joins (e.g., find departments with no employees).
+-- Think of it like: “Does this row NOT have a match?”
+SELECT DepartmentName FROM Department D WHERE NOT EXISTS (SELECT 1 FROM Employee E WHERE E.DepartmentID = D.DepartmentID);
+
+ -- wroking in hr and it
+SELECT * FROM EMPLOYEE WHERE DEPARTMENTid IN (SELECT DEPARTMENTID FROM DEPARTMENT WHERE Departmentname in ("it" OR "hR"));
+select DEPARTMENTid, MAX(SALARY) FROM EMPLOYEE GROUP BY DEPARTMENTID;  
+SELECT * FROM EMPLOYEE WHERE (DEPARTMENTID,SALARY) IN ( select DEPARTMENTid, MAX(SALARY) FROM EMPLOYEE GROUP BY DEPARTMENTID) order by DEPARTMENTid;
+ 
+ -- FIND EMPLOYYEE SHARE (d_ID,M_ID ) WITH THOSE EARNING MORE THEN 600000
+ SELECT * FROM EMPLOYEE WHERE (DEPARTMENTID,SALARY) IN ( select DEPARTMENTid FROM EMPLOYEE where salary>60000); 
+ 
+ -- find employees whose d_id and salary of employee join in 2023
+select name,departmentid,salary,JoinDate from employee WHERE JoinDate LIKE "2023%" and departmentid is not null;
+select * from employee e where exists (select * FROM DEPARTMENT D WHERE E.DEPARTMENTID=D.DEPARTMENTID); 
+ 
+ -- EMPLOYEE WHOSE LOCTION IS IN Hyderabad
+select Employeeid,name from employee e where exists (select * FROM DEPARTMENT D WHERE E.DEPARTMENTID=D.DEPARTMENTID and location = "Hyderabad"); 
