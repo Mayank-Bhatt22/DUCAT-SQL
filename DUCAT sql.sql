@@ -859,3 +859,74 @@ select * from employee e where exists (select * FROM DEPARTMENT D WHERE E.DEPART
  
  -- EMPLOYEE WHOSE LOCTION IS IN Hyderabad
 select Employeeid,name from employee e where exists (select * FROM DEPARTMENT D WHERE E.DEPARTMENTID=D.DEPARTMENTID and location = "Hyderabad"); 
+
+
+-- 7/8/25 (Thursday)
+
+-- Scenario-Based Operations on Date and Time in MySQL 
+
+-- 1. Get Current Date and Time 
+SELECT NOW(); -- Returns current date and time 
+SELECT CURDATE(); -- Returns current date 
+SELECT CURTIME(); -- Returns current time 
+
+-- 2. Calculate the Difference Between Two Dates • Example: Calculate the number of days between two dates. 
+SELECT DATEDIFF('2025-01-17', '2024-12-25') AS Days_Difference; 
+
+-- 3. Filter Data Based on Date • Example: Fetch records created in the last 7 days. 
+SELECT * FROM orders WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY); 
+
+-- 4. Add or Subtract Date Intervals • Add 10 days to a specific date. 
+SELECT DATE_ADD('2025-01-17', INTERVAL 10 DAY) AS New_Date; 
+-- • Subtract 3 months from the current date. 
+SELECT DATE_SUB(NOW(), INTERVAL 3 MONTH) AS Modified_Date; 
+
+-- 5. Extract Components from a Date • Get year, month, and day from a date. 
+SELECT YEAR(joindate) AS Year, MONTH(joindate) AS Month, DAY(joindate) AS Day FROM employee;
+
+-- 6. Format a Date • Convert a date to a specific string format. 
+SELECT DATE_FORMAT(Joindate, '%Y-%m-%d') AS Formatted_Date  FROM employee; 
+
+-- 7. Find the Last Day of a Month • Example: Get the last day of January 2025. 
+SELECT LAST_DAY('2025-01-01') AS Last_Day; 
+
+-- 8. Convert Between Date and Timestamp • Convert a date to a UNIX timestamp. 
+SELECT UNIX_TIMESTAMP('2025-01-17 14:30:00') AS Timestamp; 
+-- • Convert a UNIX timestamp back to a DATETIME. 
+SELECT FROM_UNIXTIME(1737102600) AS DateTime; 
+
+-- 9. Work with Time Zones • Display the current UTC date and time. 
+SELECT UTC_DATE(), UTC_TIME(), UTC_TIMESTAMP(); 
+
+-- 10. Find Weekdays • Example: Get the weekday name of a specific date. 
+SELECT DAYNAME('2025-01-17') AS Weekday; 
+-- • Get the weekday index. 
+SELECT DAYOFWEEK('2025-01-17') AS Weekday_Index; -- 1 = Sunday 
+
+-- 11. Find Records Matching Specific Time Intervals • Example: Fetch records created between 9 AM and 5 PM. 
+SELECT *  FROM employee WHERE TIME(Joindate) BETWEEN '09:00:00' AND '17:00:00'; 
+
+-- 12. Check if a Date is a Weekend 
+SELECT CASE WHEN DAYOFWEEK(Joindate) IN (1, 7) THEN 'Weekend' ELSE 'Weekday' END AS Day_Type FROM employee; 
+
+-- 13. Calculate Age from a Birthdate 
+SELECT YEAR(CURDATE()) - YEAR(birth_date) - (DATE_FORMAT(CURDATE(), '%m%d') < DATE_FORMAT(birth_date, '%m%d')) AS Age FROM employees; 
+
+-- 14. Group Data by Date/Month/Year • Example: Group orders by year and calculate total sales. 
+SELECT YEAR(order_date) AS Order_Year,  SUM(total_amount) AS Total_Sales FROM orders GROUP BY YEAR(order_date); 
+
+-- 15. Generate a Sequence of Dates • Example: Create a list of dates between two given dates. 
+WITH RECURSIVE date_sequence AS ( SELECT '2025-01-01' AS generated_date UNION ALL 
+SELECT DATE_ADD(generated_date, INTERVAL 1 DAY) FROM date_sequence WHERE generated_date < '2025-01-10' ) SELECT * FROM date_sequence;
+
+-- Window Function
+
+-- it don't work like this 
+SELECT *,AVG(SALARY) FROM EMPLOYEE;
+
+-- OVER() is used with window functions to perform calculations across a set of rows related to the current row without collapsing them.
+SELECT *,AVG(SALARY) OVER() FROM EMPLOYEE;
+
+-- OVER(PARTITION BY column) is used with window functions to perform calculations across groups of rows that share the same value in that column,
+-- without collapsing rows. It’s like GROUP BY but keeps all row details visible.
+SELECT *,AVG(SALARY) OVER(partition by departmentid) FROM EMPLOYEE;
