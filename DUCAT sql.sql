@@ -930,3 +930,30 @@ SELECT *,AVG(SALARY) OVER() FROM EMPLOYEE;
 -- OVER(PARTITION BY column) is used with window functions to perform calculations across groups of rows that share the same value in that column,
 -- without collapsing rows. It’s like GROUP BY but keeps all row details visible.
 SELECT *,AVG(SALARY) OVER(partition by departmentid) FROM EMPLOYEE;
+
+
+-- 8/8/2025 (friday)
+
+-- using database
+use homework;
+
+select * from (SELECT *,max(SALARY) over() as max_salary FROM EMPLOYEE) as e where salary= max_salary;
+
+-- row_number=  is a window function that assigns a unique sequential number to each row in a result set, 
+-- starting from 1 within each partition (or the entire set if no partition is given).
+SELECT *,row_number() OVER() as avg_salary FROM EMPLOYEE;
+
+
+-- order by= ORDER BY in the OVER() clause does not sort the whole output — it only decides how the window function assigns values.
+-- If you want the final output sorted, you still need an outer ORDER BY
+SELECT *,row_number() OVER(partition by departmentid order by salary desc) as avg_salary FROM EMPLOYEE;
+
+-- rank= window function assigns a ranking to rows within a partition of the result set, 
+-- based on the order you specify in the ORDER BY clause.
+SELECT *,rank() OVER() FROM EMPLOYEE;
+SELECT *,rank() OVER(order by salary) FROM EMPLOYEE;
+
+-- dense_rank= DENSE_RANK() is a window function that assigns a ranking to rows within a partition, 
+-- without skipping rank values when there are ties.
+SELECT *,dense_rank() OVER(order by salary desc) FROM EMPLOYEE;
+select * from (SELECT *,dense_rank() OVER(order by salary desc) as dense_ranks FROM EMPLOYEE) as e where dense_ranks=4;
