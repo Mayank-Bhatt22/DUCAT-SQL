@@ -957,3 +957,45 @@ SELECT *,rank() OVER(order by salary) FROM EMPLOYEE;
 -- without skipping rank values when there are ties.
 SELECT *,dense_rank() OVER(order by salary desc) FROM EMPLOYEE;
 select * from (SELECT *,dense_rank() OVER(order by salary desc) as dense_ranks FROM EMPLOYEE) as e where dense_ranks=4;
+
+
+-- 13/8/2025 (wednesday)
+
+-- using database
+use batch4pm;
+
+-- LEAD() is a window function that lets you access a row’s value from the next row without needing a self-join.
+select *,lead(salary) over(order by Joindate desc)  as lead_row from employee; 
+
+-- LAG() is the opposite of LEAD() — it retrieves a value from a previous row in the result set without using a self-join.
+select *,lag(salary) over(order by Joindate desc)  as lag_row from employee; 
+
+-- Both in one
+select *,lead(Name) over(order by Joindate desc)  as lead_row, 
+lag(Name) over(order by Joindate desc)  as lag_row 
+from employee;
+
+-- FIRST_VALUE() returns the first value in an ordered set — kind of like saying, 
+-- "Hey, what’s the very first row in this sorted group?"
+select *,first_value(Name) over(order by DepartmentID desc)  as first_row from employee;
+
+-- LAST_VALUE() in MySQL can be misleading because it returns the last value in the current window frame, 
+-- not the overall partition. To truly get the last row in a group, you have to set the window frame manually.
+select *,last_value(Name) over(order by DepartmentID desc)  as last_row from employee;
+
+-- Both in one
+select *,first_value(Name) over(order by DepartmentID desc)  as lead_row, 
+last_value(Name) over(order by DepartmentID desc)  as lag_row 
+from employee;
+
+-- to take data from excel
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/zepto_v2.csv' -- telling path of the file 
+INTO TABLE Zepto1 -- to go in this table but you have to make table firsly
+FIELDS TERMINATED BY ',' -- make it know that this one is differt in row 
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n' -- tell you to go to different line 
+IGNORE 1 LINES; -- ignoreing first line which is heading in excel
+
+select * from person2;
+
+select * from student;
