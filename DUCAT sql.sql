@@ -999,3 +999,4 @@ IGNORE 1 LINES; -- ignoreing first line which is heading in excel
 select * from person2;
 
 select * from student;
+-- Thank you
